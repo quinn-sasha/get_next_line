@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:16 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/16 15:19:30 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/16 16:09:13 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-static void	*handle_error_or_end_of_file(char **prefix, ssize_t num_bytes)
+static void	*handle_error_or_end_of_file(char **prefix, char **buffer,
+										ssize_t num_bytes)
 {
 	char	*temp;
 
+	free(*buffer);
 	if (num_bytes < 0)
 	{
 		if (*prefix)
@@ -45,15 +47,16 @@ static void	*handle_error_or_end_of_file(char **prefix, ssize_t num_bytes)
 	return (NULL);
 }
 
-static void	join_prefix_and_buffer(char **prefix, char *buffer)
+static void	join_prefix_and_buffer(char **prefix, char **buffer)
 {
 	char	*temp;
 
 	if (!*prefix)
 		*prefix = ft_strdup("");
 	temp = *prefix;
-	*prefix = ft_strjoin(temp, buffer);
+	*prefix = ft_strjoin(temp, *buffer);
 	free(temp);
+	free(*buffer);
 }
 
 static void	set_new_prefix(char **prefix, int newline_pos)
@@ -72,7 +75,7 @@ static void	set_new_prefix(char **prefix, int newline_pos)
 
 char	*get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE + 1];
+	char		*buffer;
 	ssize_t		num_bytes;
 	static char	*prefix;
 	int			newline_pos;
@@ -82,11 +85,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (TRUE)
 	{
-		ft_bzero(buffer, BUFFER_SIZE);
+		buffer = malloc(BUFFER_SIZE + 1);
+		if (!buffer)
+			return (handle_error_or_end_of_file(&prefix, &buffer, -1));
+		ft_bzero(buffer, BUFFER_SIZE + 1);
 		num_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (num_bytes < 0 || num_bytes == 0)
-			return (handle_error_or_end_of_file(&prefix, num_bytes));
-		join_prefix_and_buffer(&prefix, buffer);
+			return (handle_error_or_end_of_file(&prefix, &buffer, num_bytes));
+		join_prefix_and_buffer(&prefix, &buffer);
 		newline_pos = ft_strchr(prefix, '\n');
 		if (newline_pos == NOT_FOUND)
 			continue ;
