@@ -28,7 +28,7 @@ void	ft_bzero(void *s, size_t n)
 
 static void	*handle_error_or_end_of_file(char **prefix, ssize_t num_bytes)
 {
-	char *temp;
+	char	*temp;
 
 	if (num_bytes < 0)
 	{
