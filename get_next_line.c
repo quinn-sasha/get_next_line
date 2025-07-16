@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:16 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/16 14:07:45 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/16 15:19:30 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	set_new_prefix(char **prefix, int newline_pos)
 
 char	*get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE];
+	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		num_bytes;
 	static char	*prefix;
 	int			newline_pos;
