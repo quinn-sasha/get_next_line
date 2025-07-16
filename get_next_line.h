@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:40:12 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/15 18:04:39 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:37:36 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 # define NOT_FOUND -1
 
 void		ft_bzero(void *s, size_t n);
-static void	*handle_error_or_end_of_file(char *prefix, ssize_t num_bytes);
-static void	join_prefix_and_buffer(char *prefix, char *buffer);
-static void	set_new_prefix(char *prefix, int newline_pos);
 char		*get_next_line(int fd);
 
 int			ft_strlen(const char *s);
