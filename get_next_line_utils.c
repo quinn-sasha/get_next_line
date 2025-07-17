@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:09 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/15 17:25:06 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/17 20:29:32 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_strchr(const char *s, int c)
 {
 	int	i;
 
+	if (!s)
+		return (NOT_FOUND);
 	i = 0;
 	while (s[i])
 	{

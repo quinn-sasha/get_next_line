@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:16 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/16 16:09:13 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/17 20:40:36 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 			return (handle_error_or_end_of_file(&prefix, &buffer, -1));
 		ft_bzero(buffer, BUFFER_SIZE + 1);
 		num_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (num_bytes < 0 || num_bytes == 0)
+		if (num_bytes <= 0 && ft_strchr(prefix, '\n') == NOT_FOUND)
 			return (handle_error_or_end_of_file(&prefix, &buffer, num_bytes));
 		join_prefix_and_buffer(&prefix, &buffer);
 		newline_pos = ft_strchr(prefix, '\n');
