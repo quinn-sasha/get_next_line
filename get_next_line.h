@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:40:12 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/16 14:27:13 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/18 09:17:26 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # endif
 
 # define TRUE 1
-# define NOT_FOUND -1
 
 void	ft_bzero(void *s, size_t n);
 char	*get_next_line(int fd);

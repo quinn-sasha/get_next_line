@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:16 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/17 20:40:36 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/18 09:17:34 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_bzero(void *s, size_t n)
 }
 
 static void	*handle_error_or_end_of_file(char **prefix, char **buffer,
-										ssize_t num_bytes)
+		ssize_t num_bytes)
 {
 	char	*temp;
 
@@ -90,11 +90,11 @@ char	*get_next_line(int fd)
 			return (handle_error_or_end_of_file(&prefix, &buffer, -1));
 		ft_bzero(buffer, BUFFER_SIZE + 1);
 		num_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (num_bytes <= 0 && ft_strchr(prefix, '\n') == NOT_FOUND)
+		if (num_bytes < 0 || (num_bytes == 0 && ft_strchr(prefix, '\n') < 0))
 			return (handle_error_or_end_of_file(&prefix, &buffer, num_bytes));
 		join_prefix_and_buffer(&prefix, &buffer);
 		newline_pos = ft_strchr(prefix, '\n');
-		if (newline_pos == NOT_FOUND)
+		if (newline_pos < 0)
 			continue ;
 		line = ft_substr(prefix, 0, newline_pos);
 		set_new_prefix(&prefix, newline_pos);
