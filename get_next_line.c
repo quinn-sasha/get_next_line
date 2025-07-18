@@ -6,7 +6,7 @@
 /*   By: squinn <squinn@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:05:16 by squinn            #+#    #+#             */
-/*   Updated: 2025/07/18 09:17:34 by squinn           ###   ########.fr       */
+/*   Updated: 2025/07/18 10:39:21 by squinn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	*handle_error_or_end_of_file(char **prefix, char **buffer,
 	{
 		if (*prefix)
 			free(*prefix);
+		*prefix = NULL;
 		return (NULL);
 	}
 	if (*prefix)
